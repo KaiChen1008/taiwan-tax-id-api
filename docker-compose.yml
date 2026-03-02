@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  gov-id-api:
+    build: .
+    container_name: gov-id-api-container
+    ports:
+      - "8000:8000"
+    # 由於 data.csv 較大，建議給予足夠的記憶體
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    restart: always
