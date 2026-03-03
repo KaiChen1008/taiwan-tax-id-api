@@ -1,14 +1,11 @@
-version: '3.8'
-
 services:
-  gov-id-api:
+  tax-id-api:
     build: .
-    container_name: gov-id-api-container
+    container_name: tax-id-api
     ports:
       - "8000:8000"
-    # 由於 data.csv 較大，建議給予足夠的記憶體
     deploy:
       resources:
         limits:
-          memory: 2G
+          memory: 1G # data.csv > 300MB
     restart: always
