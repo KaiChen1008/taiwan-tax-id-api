@@ -2,7 +2,7 @@
 
 This document provides architectural and operational context for the `taiwan-tax-id-api` project.
 
-## Project Overview
+## 1. Project Overview
 
 The **Taiwan Tax ID API** is a FastAPI-based service designed to lookup Unified Business Numbers (UBN/統一編號) by business name. It processes a large dataset (~300MB CSV) provided by the Taiwan government.
 
@@ -10,6 +10,7 @@ The **Taiwan Tax ID API** is a FastAPI-based service designed to lookup Unified 
 - **Language:** Python 3.13+
 - **Framework:** FastAPI
 - **Data Processing:** Pandas
+- **Configuration:** Pydantic Settings & `.env`
 - **Scheduling:** APScheduler (for daily data updates)
 - **HTTP Client:** HTTPX (for downloading the CSV)
 - **Dependency Management:** `uv` (preferred) or `pip`
@@ -18,12 +19,12 @@ The **Taiwan Tax ID API** is a FastAPI-based service designed to lookup Unified 
 ### Architecture
 - **Data Persistence:** The source data is stored in `data.csv`. This file is **not** included in the Docker image; it is mounted as a volume.
 - **Data Lifecycle:** 
-  - On startup, the application checks if `data.csv` exists. If not, it downloads it.
+  - On startup, the application checks if `settings.DATA_FILE` exists. If not, it downloads it from `settings.DATA_URL`.
   - It then loads the CSV into memory (a dictionary mapping names to lists of UBNs) for fast lookups.
   - A background task (using `AsyncIOScheduler`) runs daily at 04:00 (Taiwan Time) to download the latest CSV from the government and reload the in-memory map.
 - **Lookup Logic:** Exact name matching. If multiple UBNs exist for a single name, all are returned.
 
-## Building and Running
+## 2. Building and Running
 
 ### Local Development (using `uv`)
 ```bash
@@ -49,14 +50,17 @@ make up
 make down
 ```
 
-## Development Conventions
+## 3. Development Conventions
 
 ### Code Style & Linting
+- All comments and documentation must be in **English**.
 - The project uses `ruff` for linting and formatting (defined in `pyproject.toml`).
 - Follow standard FastAPI patterns (e.g., using `lifespan` for startup/shutdown tasks).
 
 ### Environment Configuration
-- The source data URL is hardcoded in `main.py` as `DATA_URL`.
+- Configuration is managed via `pydantic-settings` and a `.env` file.
+- `DATA_URL`: The source URL for the government CSV.
+- `DATA_FILE`: The local filename for the CSV (defaults to `data.csv`).
 - Port 8000 is the default for both local and containerized runs.
 
 ### Data Handling
@@ -64,10 +68,10 @@ make down
 - When modifying `Dockerfile`, ensure `data.csv` is **not** copied into the image; rely on volume mounting in `docker-compose.yml`.
 - The CSV has a metadata line on the second row which is skipped during loading (`skiprows=[1]`).
 
-## API Endpoints
+## 4. API Endpoints
 
 - `GET /`: Root message.
-- `GET /get_ubn?name={名称}`: Returns a list of UBNs for the given business name.
+- `GET /get_ubn?name={NAME}`: Returns a list of UBNs for the given business name.
   - Returns `404` if the name is not found.
 
 ## 5. Quality Gates
