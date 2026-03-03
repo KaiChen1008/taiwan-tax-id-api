@@ -1,13 +1,13 @@
 APP_NAME = main:app
-UVICORN = uvicorn
+UV = uv
 HOST = 0.0.0.0
 PORT = 8000
 
-.PHONY: run build up down clean help
+.PHONY: install run build up down clean help
 
-# run the FastAPI application locally
+# Run the FastAPI application locally using uv
 run:
-	$(UVICORN) $(APP_NAME) --host $(HOST) --port $(PORT) --reload
+	$(UV) run uvicorn $(APP_NAME) --host $(HOST) --port $(PORT) --reload --no-access-log
 
 build:
 	docker-compose build
@@ -18,7 +18,7 @@ up:
 down:
 	docker-compose down
 
-# remove Python build artifacts and caches
+# Remove Python build artifacts and caches
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete

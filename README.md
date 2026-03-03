@@ -23,11 +23,14 @@ A high-performance FastAPI service that provides a searchable interface for the 
    uv sync
    ```
 
-2. **Run the API:**
+2. **Setup environment variables:**
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Run the API:**
    ```bash
    make run
-   # OR
-   uv run uvicorn main:app --reload
    ```
 
 The server will start at `http://localhost:8000`. On the first run, it will automatically download the `data.csv` file (~300MB).

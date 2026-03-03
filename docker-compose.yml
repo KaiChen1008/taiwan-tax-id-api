@@ -6,6 +6,7 @@ services:
       - "8000:8000"
     volumes:
       - ./data.csv:/app/data.csv
+      - ./.env:/app/.env
     deploy:
       resources:
         limits:
