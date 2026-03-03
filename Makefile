@@ -1,4 +1,4 @@
-APP_NAME = main:app
+APP_NAME = app.main:app
 UV = uv
 HOST = 0.0.0.0
 PORT = 8000

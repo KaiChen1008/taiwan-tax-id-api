@@ -32,7 +32,7 @@ The **Taiwan Tax ID API** is a FastAPI-based service designed to lookup Unified 
 uv sync
 
 # Run the application with hot-reload
-uv run uvicorn main:app --reload
+uv run uvicorn app.main:app --reload
 ```
 
 ### Local Development (using `Makefile`)
