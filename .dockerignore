@@ -1,12 +1,17 @@
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.env
-.git
-.gitignore
-data.csv
+# Python & Virtualenv
+__pycache__/
+*.py[cod]
+.venv/
 
+# Project Data & Secrets
+data.csv
+.env
+
+# Tooling & Front-end
+.git/
+.vscode/
+frontend/
+.clasp.json
+
+# OS Specific
+.DS_Store

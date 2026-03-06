@@ -1,7 +1,7 @@
 [project]
 name = "taiwan-tax-id-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "This project provides a high-performance API to lookup Taiwan Unified Business Numbers (UBN/統一編號) by business name, with a ready-to-use Google Sheets integration."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
@@ -13,6 +13,12 @@ dependencies = [
     "python-multipart>=0.0.22",
     "uvicorn>=0.41.0",
 ]
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
 
 [dependency-groups]
 dev = ["ruff>=0.15.4"]

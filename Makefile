@@ -1,30 +1,22 @@
-APP_NAME = app.main:app
 UV = uv
-HOST = 0.0.0.0
-PORT = 8000
+APP = app.main:app
 
-.PHONY: install run build up down clean help
+.PHONY: run up down clean help
 
-# Run the FastAPI application locally using uv
+# Run the API locally with hot-reload
 run:
-	$(UV) run uvicorn $(APP_NAME) --host $(HOST) --port $(PORT) --reload --no-access-log
+	$(UV) run uvicorn $(APP) --reload --no-access-log
 
-build:
-	docker-compose build
-
+# Start production containers
 up:
-	docker-compose up -d
+	docker-compose up -d --build
 
+# Stop containers
 down:
 	docker-compose down
 
-# Remove Python build artifacts and caches
+# Clean build artifacts
 clean:
 	find . -type d -name "__pycache__" -exec rm -rf {} +
-	find . -type f -name "*.pyc" -delete
-	find . -type f -name "*.pyo" -delete
-	find . -type f -name "*.pyd" -delete
+	find . -type f -name "*.py[cod]" -delete
 	find . -type f -name ".DS_Store" -delete
-	find . -type d -name ".pytest_cache" -exec rm -rf {} +
-	find . -type f -name ".coverage" -delete
-	@echo "Cleanup completed."

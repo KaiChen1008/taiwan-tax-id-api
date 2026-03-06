@@ -1,16 +1,15 @@
-data.csv
+# Secrets & Large Data
 .env
+data.csv
 
-# vscode-generated files
-.vscode
-
-# Python-generated files
+# Python
 __pycache__/
-*.py[oc]
+*.py[cod]
 build/
 dist/
-wheels/
-*.egg-info
+.venv/
 
-# Virtual environments
-.venv
+# Tools & IDEs
+.vscode/
+.DS_Store
+node_modules/
