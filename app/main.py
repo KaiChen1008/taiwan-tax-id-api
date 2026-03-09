@@ -4,8 +4,8 @@ from urllib.parse import unquote
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from fastapi import FastAPI, HTTPException, Query, Request
 
-from app.config import logger
 from app import data_manager
+from app.config import logger
 from app.scheduler import scheduled_update
 
 

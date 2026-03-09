@@ -3,6 +3,7 @@ from typing import Dict, List
 
 import httpx
 import pandas as pd
+
 from app.config import logger, settings
 
 # Global variable to store data
