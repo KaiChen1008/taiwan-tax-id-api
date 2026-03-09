@@ -20,7 +20,7 @@ The backend is a FastAPI service that processes a ~300MB government dataset. It 
    make run
    ```
 
-   The API will be available at `http://localhost:8000`.
+   The API will be available at `http://localhost:8092`.
 
 ### Docker Run
 
@@ -79,7 +79,7 @@ It will return `23570644`.
 `GET /get_ubn?name={NAME}`
 
 **Request:**
-`GET http://localhost:8000/get_ubn?name=台積電`
+`GET http://localhost:8092/get_ubn?name=台積電`
 
 **Response:**
 

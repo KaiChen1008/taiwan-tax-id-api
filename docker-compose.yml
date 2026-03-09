@@ -3,7 +3,7 @@ services:
     build: .
     container_name: tax-id-api
     ports:
-      - "8000:8000"
+      - "8092:8092"
     volumes:
       - ./data.csv:/app/data.csv
       - ./.env:/app/.env

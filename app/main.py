@@ -62,4 +62,4 @@ async def get_ubn(name: str = Query(..., description="Business name to lookup"))
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000, access_log=False)
+    uvicorn.run(app, host="0.0.0.0", port=8092, access_log=False)

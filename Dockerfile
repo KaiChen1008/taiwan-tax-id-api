@@ -34,4 +34,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 COPY app/ app/
 
 # Run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--no-access-log"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8092", "--no-access-log"]
