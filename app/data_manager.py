@@ -28,8 +28,8 @@ async def download_data():
 
 async def load_data():
     global name_to_ubn_map
-    if not os.path.exists(settings.DATA_FILE):
-        logger.info(f"{settings.DATA_FILE} does not exist, starting download...")
+    if not os.path.exists(settings.DATA_FILE) or not os.path.isfile(settings.DATA_FILE):
+        logger.info(f"{settings.DATA_FILE} does not exist or is not a file, starting download...")
         success = await download_data()
         if not success:
             logger.error("Initial data download failed, cannot start service.")
