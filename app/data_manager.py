@@ -14,7 +14,9 @@ name_to_ubn_map: Dict[str, List[str]] = {}
 async def download_data():
     logger.info(f"Downloading data from {settings.DATA_URL}...")
     try:
-        async with httpx.AsyncClient() as client:
+        # SSL verification disabled due to eip.fia.gov.tw's certificate
+        # missing Subject Key Identifier (SKI), a known issue on their end.
+        async with httpx.AsyncClient(verify=False) as client:
             response = await client.get(settings.DATA_URL, timeout=None)
             response.raise_for_status()
             with open(settings.DATA_FILE, "wb") as f:
