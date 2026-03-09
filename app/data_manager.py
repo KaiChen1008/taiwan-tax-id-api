@@ -19,6 +19,10 @@ async def download_data():
         async with httpx.AsyncClient(verify=False) as client:
             response = await client.get(settings.DATA_URL, timeout=None)
             response.raise_for_status()
+
+            # Ensure the directory exists
+            os.makedirs(os.path.dirname(settings.DATA_FILE), exist_ok=True)
+
             with open(settings.DATA_FILE, "wb") as f:
                 f.write(response.content)
         logger.info(f"Download complete, saved to {settings.DATA_FILE}")
@@ -30,7 +34,7 @@ async def download_data():
 
 async def load_data():
     global name_to_ubn_map
-    if not os.path.exists(settings.DATA_FILE) or not os.path.isfile(settings.DATA_FILE):
+    if not os.path.exists(settings.DATA_FILE):
         logger.info(f"{settings.DATA_FILE} does not exist or is not a file, starting download...")
         success = await download_data()
         if not success:

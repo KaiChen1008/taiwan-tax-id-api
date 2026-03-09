@@ -1,5 +1,6 @@
 # Secrets & Large Data
 .env
+data/
 data.csv
 
 # Python

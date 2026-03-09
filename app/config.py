@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 class Settings(BaseSettings):
     DATA_URL: str = "https://eip.fia.gov.tw/data/BGMOPEN1.csv"
-    DATA_FILE: str = "data.csv"
+    DATA_FILE: str = "data/data.csv"
 
     model_config = SettingsConfigDict(env_file=".env")
 
